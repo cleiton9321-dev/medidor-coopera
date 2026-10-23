@@ -4,90 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medidor Coopera</title>
+
+    <!-- Favicon em SVG (um raio minimalista) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0a0a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/></svg>"
+    />
+
     <link rel="stylesheet" href="style.css" />
+    <!-- Script dos ícones da Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
   <body>
     <header>
-      <h1>Medidor Coopera</h1>
-      <p>
-        Simule o consumo da sua casa e descubra quantos painéis solares você
-        precisa.
-      </p>
+      <div class="header-content">
+        <h1>Medidor Coopera</h1>
+        <p>
+          Simule o consumo da sua casa e descubra quantos painéis solares você
+          precisa.
+        </p>
+      </div>
     </header>
 
-    <main>
-      <!-- Formulário de cadastro -->
-      <section class="card">
-        <h2>Adicionar Aparelho</h2>
-        <form id="form-aparelho">
-          <input type="text" id="nome" placeholder="Nome " required />
-          <input
-            type="number"
-            id="potencia"
-            placeholder="Potência (W)"
-            min="1"
-            max="10000"
-            required
-          />
-          <input
-            type="number"
-            id="horas"
-            placeholder="Horas/dia"
-            min="0"
-            max="24"
-            step="0.1"
-            required
-          />
-          <input
-            type="number"
-            id="dias"
-            placeholder="Dias/mês"
-            min="1"
-            max="31"
-            required
-          />
-          <button type="submit">Adicionar</button>
-        </form>
-      </section>
+    <main class="dashboard">
+      <!-- Coluna Esquerda: Cadastro e Lista -->
+      <div class="coluna-esquerda">
+        <section class="card">
+          <h2><i data-lucide="plus-circle"></i> Adicionar Aparelho</h2>
+          <form id="form-aparelho">
+            <div class="input-group">
+              <input
+                type="text"
+                id="nome"
+                placeholder="Nome do aparelho"
+                required
+              />
+            </div>
+            <div class="input-row">
+              <input
+                type="number"
+                id="potencia"
+                placeholder="Potência (W)"
+                min="1"
+                max="10000"
+                required
+              />
+              <input
+                type="number"
+                id="horas"
+                placeholder="Horas/dia"
+                min="0"
+                max="24"
+                step="0.1"
+                required
+              />
+              <input
+                type="number"
+                id="dias"
+                placeholder="Dias/mês"
+                min="1"
+                max="31"
+                required
+              />
+            </div>
+            <button type="submit">Adicionar à Lista</button>
+          </form>
+        </section>
 
-      <!-- Lista de aparelhos -->
-      <section class="card">
-        <h2>Seus Aparelhos</h2>
-        <!-- O professor pede o id "lista-orion" aqui -->
-        <ul id="lista-orion"></ul>
-        <button id="btn-simular">Simular Consumo</button>
-        <p id="erro" class="erro"></p>
-      </section>
+        <section class="card">
+          <h2><i data-lucide="plug"></i> Seus Aparelhos</h2>
+          <ul id="lista-orion">
+            <li class="lista-vazia">Nenhum aparelho adicionado ainda.</li>
+          </ul>
+          <button id="btn-simular" class="btn-simular">
+            <i data-lucide="zap"></i> Simular Consumo
+          </button>
+          <p id="erro" class="erro"></p>
+        </section>
+      </div>
 
-      <!-- Resultado -->
-      <section class="card" id="resultado" style="display: none">
-        <h2>Resultado da Simulação</h2>
-        <p>
-          <strong>Consumo Total:</strong> <span id="res-consumo"></span> kWh/mês
-        </p>
-        <p><strong>Total da Conta:</strong> <span id="res-total"></span></p>
-        <p>
-          <strong>Painéis Necessários:</strong> <span id="res-paineis"></span>
-        </p>
-        <p class="destaque">
-          <strong>Aparelho Mais Caro:</strong> <span id="res-mais-caro"></span>
-        </p>
+      <!-- Coluna Direita: Resultados -->
+      <div class="coluna-direita">
+        <section class="card" id="resultado" style="display: none">
+          <h2><i data-lucide="bar-chart-2"></i> Resultado da Simulação</h2>
 
-        <h3>Detalhes por Aparelho</h3>
-        <table id="tabela-detalhes">
-          <thead>
-            <tr>
-              <th>Aparelho</th>
-              <th>Consumo (kWh)</th>
-              <th>Custo (R$)</th>
-              <th>% do Total</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
+          <div class="resumo-grid">
+            <div class="resumo-item">
+              <span class="resumo-label">Consumo Total</span>
+              <span class="resumo-valor" id="res-consumo"></span>
+            </div>
+            <div class="resumo-item">
+              <span class="resumo-label">Total da Conta</span>
+              <span class="resumo-valor destaque" id="res-total"></span>
+            </div>
+            <div class="resumo-item">
+              <span class="resumo-label">Painéis Necessários</span>
+              <span class="resumo-valor" id="res-paineis"></span>
+            </div>
+          </div>
+
+          <div class="aparelho-caro">
+            <h3><i data-lucide="award"></i> Aparelho Mais Caro</h3>
+            <p id="res-mais-caro"></p>
+          </div>
+
+          <h3>Detalhes por Aparelho</h3>
+          <div class="tabela-wrapper">
+            <table id="tabela-detalhes">
+              <thead>
+                <tr>
+                  <th>Aparelho</th>
+                  <th>Consumo</th>
+                  <th>Custo</th>
+                  <th>%</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Placeholder para quando não há resultados -->
+        <div class="card placeholder" id="placeholder-resultado">
+          <h2><i data-lucide="sun"></i> Pronto para simular?</h2>
+          <p>
+            Adicione seus aparelhos na lista ao lado e clique em
+            <strong>Simular Consumo</strong> para ver os resultados aqui.
+          </p>
+        </div>
+      </div>
     </main>
 
+    <script>
+      // Inicializa os ícones da Lucide após o carregamento da página
+      lucide.createIcons();
+    </script>
     <script src="app.js"></script>
   </body>
 </html>
