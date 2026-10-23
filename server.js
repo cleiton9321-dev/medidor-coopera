@@ -34,25 +34,19 @@ app.post("/api/simular", (req, res) => {
       a.potenciaW < 1 ||
       a.potenciaW > 10000
     ) {
-      return res
-        .status(400)
-        .json({
-          erro: `potenciaW deve estar entre 1 e 10000 (aparelho ${numAparelho})`,
-        });
+      return res.status(400).json({
+        erro: `potenciaW deve estar entre 1 e 10000 (aparelho ${numAparelho})`,
+      });
     }
     if (typeof a.horasDia !== "number" || a.horasDia < 0 || a.horasDia > 24) {
-      return res
-        .status(400)
-        .json({
-          erro: `horasDia deve estar entre 0 e 24 (aparelho ${numAparelho})`,
-        });
+      return res.status(400).json({
+        erro: `horasDia deve estar entre 0 e 24 (aparelho ${numAparelho})`,
+      });
     }
     if (!Number.isInteger(a.diasMes) || a.diasMes < 1 || a.diasMes > 31) {
-      return res
-        .status(400)
-        .json({
-          erro: `diasMes deve ser inteiro entre 1 e 31 (aparelho ${numAparelho})`,
-        });
+      return res.status(400).json({
+        erro: `diasMes deve ser inteiro entre 1 e 31 (aparelho ${numAparelho})`,
+      });
     }
   }
 
@@ -63,4 +57,9 @@ app.post("/api/simular", (req, res) => {
 // Liga o servidor na porta 3000
 app.listen(3000, () => {
   console.log("Medidor Coopera rodando em http://localhost:3000");
+});
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Medidor Coopera rodando na porta ${PORT}`);
 });
