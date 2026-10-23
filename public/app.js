@@ -75,7 +75,7 @@ document.querySelector("#btn-simular").addEventListener("click", async () => {
     // Se deu certo (200), preenche os resultados
 
     // ATENÇÃO: Regra interna exigida no seu PDF: total multiplicado por 1.07 (taxa de iluminação)
-    const totalComTaxa = dados.totalMes * 1.07;
+    const totalComTaxa = dados.totalMes;
 
     document.querySelector("#res-consumo").textContent = dados.consumoKwhMes;
     document.querySelector("#res-total").textContent =

@@ -1,13 +1,24 @@
+/* Variáveis globais de cor - Identidade Visual Bandeira Verde */
+:root {
+  --cor-primaria: #2e7d32; /* Verde principal */
+  --cor-primaria-hover: #1b5e20; /* Verde escuro para hover */
+  --cor-primaria-clara: #e8f5e9; /* Verde clarinho para fundos */
+  --cor-fundo: #f4f8f4; /* Fundo geral da página */
+  --cor-texto: #333;
+  --cor-texto-titulo: #1b5e20;
+  --cor-erro: #d9534f;
+}
+
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
 
 body {
-  background-color: #f4f4f9;
+  background-color: var(--cor-fundo);
   margin: 0;
   padding: 20px;
-  color: #333;
+  color: var(--cor-texto);
 }
 
 header {
@@ -16,7 +27,7 @@ header {
 }
 
 header h1 {
-  color: #7b3fa0; /* Cor de destaque exigida */
+  color: var(--cor-texto-titulo);
 }
 
 main {
@@ -31,9 +42,7 @@ main {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  box-shadow:
-    3px 3px 6px 0px #ccdbe8 inset,
-    -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #form-aparelho {
@@ -45,29 +54,20 @@ main {
 #form-aparelho input {
   flex: 1;
   min-width: 120px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow:
-    3px 3px 6px 0px #ccdbe8 inset,
-    -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;
-  position: relative;
-  cursor: text;
-  font-size: 14px;
-  line-height: 20px;
   padding: 0 16px;
   height: 48px;
   background-color: #fff;
   border: 1px solid #d6d6e7;
-  border-radius: 3px;
+  border-radius: 4px;
   color: rgb(35, 38, 59);
   box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
-  overflow: hidden;
   transition: all 100ms ease-in-out;
-  :focus {
-    border-color: #3c4fe0;
-    box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
-  }
+}
+
+#form-aparelho input:focus {
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 2px var(--cor-primaria-clara);
+  outline: none;
 }
 
 button {
@@ -76,35 +76,38 @@ button {
   border: 0;
   cursor: pointer;
   will-change: box-shadow, transform;
-  background: radial-gradient(100% 100% at 100% 0%, #7b3fa0 0%, #7b3fa0 100%);
+  background: radial-gradient(
+    100% 100% at 100% 0%,
+    var(--cor-primaria) 0%,
+    var(--cor-primaria-hover) 100%
+  );
   box-shadow:
-    0px 2px 4px rgb(45 35 66 / 40%),
-    0px 7px 13px -3px rgb(45 35 66 / 30%),
-    inset 0px -3px 0px rgb(58 65 111 / 50%);
-  padding: 0 32px;
+    0px 2px 4px rgb(45 35 66 / 20%),
+    0px 7px 13px -3px rgb(45 35 66 / 15%),
+    inset 0px -3px 0px rgb(0 0 0 / 20%);
+  padding: 0 24px;
   border-radius: 6px;
   color: #fff;
   height: 48px;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: bold;
   text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
   transition:
     box-shadow 0.15s ease,
     transform 0.15s ease;
-  :hover {
-    box-shadow:
-      0px 4px 8px rgb(45 35 66 / 40%),
-      0px 7px 13px -3px rgb(45 35 66 / 30%),
-      inset 0px -3px 0px #3c4fe0;
-    transform: translateY(-2px);
-  }
-  :active {
-    box-shadow: inset 0px 3px 7px #3c4fe0;
-    transform: translateY(2px);
-  }
 }
 
 button:hover {
-  background-color: #5a2c76;
+  box-shadow:
+    0px 4px 8px rgb(45 35 66 / 20%),
+    0px 7px 13px -3px rgb(45 35 66 / 15%),
+    inset 0px -3px 0px rgb(0 0 0 / 30%);
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: inset 0px 3px 7px rgba(0, 0, 0, 0.3);
+  transform: translateY(2px);
 }
 
 ul {
@@ -121,19 +124,24 @@ li {
 }
 
 .btn-remover {
-  background-color: #d9534f;
+  background-color: var(--cor-erro);
   padding: 5px 10px;
   font-size: 0.8em;
+  height: 36px;
+}
+
+.btn-remover:hover {
+  background-color: #c9302c;
 }
 
 .erro {
-  color: #d9534f;
+  color: var(--cor-erro);
   font-weight: bold;
   margin-top: 10px;
 }
 
 .destaque {
-  color: #7b3fa0;
+  color: var(--cor-primaria);
   font-size: 1.2em;
 }
 
@@ -151,5 +159,6 @@ td {
 }
 
 th {
-  background-color: #f8f8f8;
+  background-color: var(--cor-primaria-clara);
+  color: var(--cor-texto-titulo);
 }
