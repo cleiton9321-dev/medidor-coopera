@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medidor Coopera</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Medidor Coopera</h1>
+      <p>
+        Simule o consumo da sua casa e descubra quantos painéis solares você
+        precisa.
+      </p>
+    </header>
+
+    <main>
+      <!-- Formulário de cadastro -->
+      <section class="card">
+        <h2>Adicionar Aparelho</h2>
+        <form id="form-aparelho">
+          <input
+            type="text"
+            id="nome"
+            placeholder="Nome (ex: Geladeira)"
+            required
+          />
+          <input
+            type="number"
+            id="potencia"
+            placeholder="Potência (W)"
+            min="1"
+            max="10000"
+            required
+          />
+          <input
+            type="number"
+            id="horas"
+            placeholder="Horas/dia"
+            min="0"
+            max="24"
+            step="0.1"
+            required
+          />
+          <input
+            type="number"
+            id="dias"
+            placeholder="Dias/mês"
+            min="1"
+            max="31"
+            required
+          />
+          <button type="submit">Adicionar</button>
+        </form>
+      </section>
+
+      <!-- Lista de aparelhos -->
+      <section class="card">
+        <h2>Seus Aparelhos</h2>
+        <!-- O professor pede o id "lista-orion" aqui -->
+        <ul id="lista-orion"></ul>
+        <button id="btn-simular">Simular Consumo</button>
+        <p id="erro" class="erro"></p>
+      </section>
+
+      <!-- Resultado -->
+      <section class="card" id="resultado" style="display: none">
+        <h2>Resultado da Simulação</h2>
+        <p>
+          <strong>Consumo Total:</strong> <span id="res-consumo"></span> kWh/mês
+        </p>
+        <p><strong>Total da Conta:</strong> <span id="res-total"></span></p>
+        <p>
+          <strong>Painéis Necessários:</strong> <span id="res-paineis"></span>
+        </p>
+        <p class="destaque">
+          <strong>Aparelho Mais Caro:</strong> <span id="res-mais-caro"></span>
+        </p>
+
+        <h3>Detalhes por Aparelho</h3>
+        <table id="tabela-detalhes">
+          <thead>
+            <tr>
+              <th>Aparelho</th>
+              <th>Consumo (kWh)</th>
+              <th>Custo (R$)</th>
+              <th>% do Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
