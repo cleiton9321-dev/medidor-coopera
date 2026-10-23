@@ -15,4 +15,4 @@ Simulador de consumo de energia desenvolvido para a cooperativa Coopera Luz.
 
 ## Código de Verificação
 
-[COLE AQUI O CÓDIGO QUE O SITE DO PROFESSOR GERAR QUANDO VOCÊ COMPLETAR OS AUTOTESTES]
+MC-04-0DU7
